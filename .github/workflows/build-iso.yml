@@ -1,0 +1,17 @@
+
+name: Build Live ISO
+on:
+  workflow_run:
+    workflows: [Build Custom Bazzite Image]
+    types: [completed]
+
+jobs:
+  iso:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Live ISO
+        uses: ublue-os/livecd-action@v4
+        with:
+          ostree-ref: my-os/stable
+          iso-name: my-os.iso
